@@ -32,7 +32,7 @@ pipeline {
             }
             post {
                 failure {
-                   sh 'cat ./sphinx-build.log
+                   sh 'cat ./sphinx-build.log'
                 }
             }
         }
