@@ -2,7 +2,7 @@ pipeline {
     agent {
         dockerfile {
           filename "Dockerfile"
-          args "-u root -v /tmp:/tmp" //needed to get around permission issues
+          args "-u root" //needed to get around permission issues
         }
     }
     environment {
@@ -17,7 +17,7 @@ pipeline {
                 // virtualenv may not be necessary with root,
                 // but I still think it's a good idea.
                 sh '''                   
-                   mkdir ./pyvenv
+                   mkdir -p ./pyvenv
                    cd pyvenv
                    python3.9 -m venv ./
                    source ./bin/activate
@@ -33,7 +33,7 @@ pipeline {
                 //sh 'rm -f ${SPHINX_DIR}/sphinx-build.log'
 
                 sh '''    
-                   cd /pyvenv
+                   cd ./pyvenv
                    source ./bin/activate
                    make html
                 '''
