@@ -16,7 +16,9 @@ pipeline {
             steps {
                 // virtualenv may not be necessary with root,
                 // but I still think it's a good idea.
-                sh '''                   
+                sh '''
+                   python3.9 -m venv .
+                   source ./bin/activate
                    pip install -r ./reqs.txt
                 '''
             }
@@ -24,9 +26,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''    
-                   rm -rf ${BUILD_DIR}
                    sphinx-build  -q -w ./sphinx-build.log \
-                   -b html source ${BUILD_DIR}
+                   -b html source /temp/html
                 '''
             }
             post {
