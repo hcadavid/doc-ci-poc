@@ -25,7 +25,6 @@ pipeline {
             steps {
                 sh '''    
                    rm -rf ${BUILD_DIR}
-                   rm ./sphinx-build.log
                    sphinx-build  -q -w ./sphinx-build.log \
                    -b html source ${BUILD_DIR}
                 '''
