@@ -7,7 +7,7 @@ pipeline {
     }
     environment {
         SPHINX_DIR  = './'
-        BUILD_DIR   = '/tmp/html'
+        BUILD_DIR   = '/jenkins-output/sphinx/html'
         SOURCE_DIR  = '.'
         DEPLOY_HOST = 'deployer@www.example.com:/path/to/docs/'
     }
@@ -17,7 +17,6 @@ pipeline {
                 // virtualenv may not be necessary with root,
                 // but I still think it's a good idea.
                 sh '''
-                   find /*
                    pip install -r ./reqs.txt
                 '''
             }
@@ -26,7 +25,7 @@ pipeline {
             steps {
                 sh '''    
                    sphinx-build  -q -w ./sphinx-build.log \
-                   -b html source /temp/html
+                   -b html source ${BUILD_DIR}
                 '''
             }
             post {
