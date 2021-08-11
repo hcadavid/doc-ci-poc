@@ -7,7 +7,7 @@ pipeline {
     }
     environment {
         SPHINX_DIR  = './'
-        BUILD_DIR   = './build'
+        BUILD_DIR   = '/tmp/html'
         SOURCE_DIR  = '.'
         DEPLOY_HOST = 'deployer@www.example.com:/path/to/docs/'
     }
@@ -25,12 +25,14 @@ pipeline {
             steps {
                 sh '''    
                    rm -rf ${BUILD_DIR}
-                   sphinx-build source /tmp/html
+                   rm ./sphinx-build.log
+                   sphinx-build  -q -w ./sphinx-build.log \
+                   -b html source ${BUILD_DIR}
                 '''
             }
             post {
                 failure {
-                   sh 'echo the failure'
+                   sh 'cat ./sphinx-build.log
                 }
             }
         }
