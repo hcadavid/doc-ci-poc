@@ -17,6 +17,7 @@ pipeline {
                 // virtualenv may not be necessary with root,
                 // but I still think it's a good idea.
                 sh '''
+                   find /*
                    pip install -r ./reqs.txt
                 '''
             }
