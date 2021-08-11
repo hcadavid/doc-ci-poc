@@ -16,12 +16,9 @@ pipeline {
             steps {
                 // virtualenv may not be necessary with root,
                 // but I still think it's a good idea.
-                sh '''
-                   mkdir -p ./pyvenv
-                   cd pyvenv
-                   python3.9 -m venv ./
+                sh '''                   
+                   python3.9 -m venv .
                    source ./bin/activate
-                   cd ..
                    pip install -r ./reqs.txt
                 '''
             }
@@ -30,9 +27,6 @@ pipeline {
             steps {
                 sh '''    
                    rm -rf ${BUILD_DIR}
-                   cd ./pyvenv
-                   source ./bin/activate
-                   cd ..
                    make html
                 '''
             }
