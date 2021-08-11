@@ -2,7 +2,7 @@ pipeline {
     agent {
         dockerfile {
           filename "Dockerfile"
-          args "-u root" //needed to get around permission issues
+          args "-u root -v /tmp:/tmp" //needed to get around permission issues
         }
     }
     environment {
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh '''    
                    rm -rf ${BUILD_DIR}
-                   sphinx-build source build
+                   sphinx-build source /tmp/html
                 '''
             }
             post {
