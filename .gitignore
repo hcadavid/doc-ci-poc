@@ -1,3 +1,7 @@
 _build
 build
 venv
+bin
+include
+lib
+pyenv.cfg

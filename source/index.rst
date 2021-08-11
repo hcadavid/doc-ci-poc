@@ -1,15 +1,29 @@
-=================
-Continuous Sphinx
-=================
+.. DaC proof of concept documentation master file, created by
+   sphinx-quickstart on Tue Aug  3 11:11:09 2021.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
 
-A living example of a sphinx project that uses `Travis-CI`_ for continuous
-integration and `Netlify`_ for continuous deployment.
+Welcome to DaC proof of concept's documentation!
+================================================
 
 .. toctree::
    :maxdepth: 2
+   :caption: Contents:
 
-   continuous-integration
-   continuous-deployment
+   about.rst
+   reqs.rst
 
-.. _Travis-CI: https://travis-ci.org/
-.. _Netlify: https://www.netlify.com/
+The TODOs
+
+
+The changes (GIT history)
+==========================
+.. git_changelog::
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
