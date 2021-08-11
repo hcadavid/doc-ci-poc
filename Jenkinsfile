@@ -25,12 +25,12 @@ pipeline {
             steps {
                 sh '''    
                    rm -rf ${BUILD_DIR}
-                   make html
+                   sphinx-build source build
                 '''
             }
             post {
                 failure {
-                    //sh 'cat ${SPHINX_DIR}/sphinx-build.log'
+                   
                 }
             }
         }
