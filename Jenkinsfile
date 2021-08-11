@@ -7,8 +7,8 @@ pipeline {
     }
     environment {
         SPHINX_DIR  = '.'
-        BUILD_DIR   = './_built'
-        SOURCE_DIR  = './source'
+        BUILD_DIR   = './built'
+        SOURCE_DIR  = '.'
         DEPLOY_HOST = 'deployer@www.example.com:/path/to/docs/'
     }
     stages {
@@ -17,23 +17,24 @@ pipeline {
                 // virtualenv may not be necessary with root,
                 // but I still think it's a good idea.
                 sh '''
+                   mkdir /pyvenv
+                   cd /pyvenv
                    python3.9 -m venv .
-                   ./bin/activate
-                   pip install -r ${SPHINX_DIR}/reqs.txt
+                   source ./bin/activate
+                   pip install -r ./reqs.txt
                 '''
             }
         }
         stage('Build') {
             steps {
                 // clear out old files
-                sh 'rm -rf ${BUILD_DIR}'
-                sh 'rm -f ${SPHINX_DIR}/sphinx-build.log'
+                //sh 'rm -rf ${BUILD_DIR}'
+                //sh 'rm -f ${SPHINX_DIR}/sphinx-build.log'
 
-                sh '''
-                   ${WORKSPACE}/pyenv/bin/sphinx-build \
-                   -q -w ${SPHINX_DIR}/sphinx-build.log \
-                   -b html \
-                   -d ${BUILD_DIR}/doctrees ${SOURCE_DIR} ${BUILD_DIR}
+                sh '''    
+                   cd /pyvenv
+                   source ./bin/activate
+                   make html
                 '''
             }
             post {
