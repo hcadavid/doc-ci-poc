@@ -17,8 +17,6 @@ pipeline {
                 // virtualenv may not be necessary with root,
                 // but I still think it's a good idea.
                 sh '''
-                   python3.9 -m venv .
-                   source ./bin/activate
                    pip install -r ./reqs.txt
                 '''
             }
