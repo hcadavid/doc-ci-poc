@@ -17,10 +17,12 @@ pipeline {
                 // virtualenv may not be necessary with root,
                 // but I still think it's a good idea.
                 sh '''
+                   find *
                    mkdir /pyvenv
                    cd /pyvenv
                    python3.9 -m venv .
                    source ./bin/activate
+                   cd /
                    pip install -r ./reqs.txt
                 '''
             }
