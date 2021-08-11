@@ -30,7 +30,7 @@ pipeline {
             }
             post {
                 failure {
-                    sh 'cat ${SPHINX_DIR}/sphinx-build.log'
+                    //sh 'cat ${SPHINX_DIR}/sphinx-build.log'
                 }
             }
         }
