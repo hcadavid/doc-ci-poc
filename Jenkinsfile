@@ -6,7 +6,7 @@ pipeline {
         }
     }
     environment {
-        SPHINX_DIR  = '.'
+        SPHINX_DIR  = './'
         BUILD_DIR   = './built'
         SOURCE_DIR  = '.'
         DEPLOY_HOST = 'deployer@www.example.com:/path/to/docs/'
@@ -16,14 +16,12 @@ pipeline {
             steps {
                 // virtualenv may not be necessary with root,
                 // but I still think it's a good idea.
-                sh '''
-                   pwd
-                   ls reqs.txt
-                   mkdir /pyvenv
-                   cd /pyvenv
+                sh '''                   
+                   mkdir ./pyvenv
+                   cd pyvenv
                    python3.9 -m venv ./
                    source ./bin/activate
-                   cd /
+                   cd ..
                    pip install -r ./reqs.txt
                 '''
             }
