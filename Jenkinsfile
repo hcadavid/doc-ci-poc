@@ -30,7 +30,7 @@ pipeline {
             }
             post {
                 failure {
-                   
+                   sh 'echo the failure'
                 }
             }
         }
