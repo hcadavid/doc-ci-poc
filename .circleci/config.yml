@@ -9,12 +9,23 @@ jobs:
       - run:
           name: Install dependencies
           command: pip install -r reqs.txt
+  docs-build:
+    docker:
+      - image: python:3.9
+    steps:
+      - checkout
       - run:
-          name: buildhtml
-          command: sphinx-build -nWT -b dummy source build
-
+          name: Install dependencies
+          command: pip install -r reqs.txt
+      - run:
+          name: Build docs
+          command: make html
+      - persist_to_workspace:
+          root: build
+          paths: html
 workflows:
   version: 2
   build:
     jobs:
       - test
+      - docs-build
